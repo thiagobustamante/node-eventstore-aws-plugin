@@ -26,5 +26,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm test
-    - run: codecov -f ./reports/coverage/*.json
+    - name: CodeCov report
+      env:
+        CODECOV_TOKEN: ${{ secrets.codecov }}
+      run: codecov -f ./reports/coverage/*.json
 

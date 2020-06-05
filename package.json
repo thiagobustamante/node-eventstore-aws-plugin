@@ -54,6 +54,7 @@
     "@types/lodash": "^4.14.150",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
+    "codecov": "^3.6.5",
     "cross-env": "^5.2.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
