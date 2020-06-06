@@ -40,7 +40,7 @@ export class SQSPublisher implements Publisher, HasSubscribers {
         return messageId !== null && messageId !== undefined;
     }
 
-    public async subscribe(aggregation: string, subscriber: Subscriber): Promise<Subscription> {
+    public async subscribe(_: string, subscriber: Subscriber): Promise<Subscription> {
         const consumer = Consumer.create({
             handleMessage: async (sqsMessage) => {
                 const message: Message = JSON.parse(sqsMessage.Body);
