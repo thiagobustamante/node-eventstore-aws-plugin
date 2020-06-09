@@ -13,6 +13,6 @@ module.exports = (config) => {
     coverageAnalysis: 'off',
     tsconfigFile: 'tsconfig.json',
     mutate: ['src/**/*.ts'],
-    thresholds: { break: 99 }
+    thresholds: { break: 80 }
   });
 };  
