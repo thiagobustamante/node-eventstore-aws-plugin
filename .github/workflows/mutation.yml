@@ -16,7 +16,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: npm ci
-      - run: npm test:mutation
+      - run: npm run test:mutation
       - name: Archive mutation coverage results
         uses: actions/upload-artifact@v1
         with:
