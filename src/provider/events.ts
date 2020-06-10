@@ -44,17 +44,7 @@ export class EventsTable extends DynamoDBTable {
 
     public async getEvents(stream: Stream, offset?: string, limit?: number): Promise<Array<Event>> {
         await this.ensureTables();
-        const filter: any = {
-            ExpressionAttributeValues: { ':key': this.getKey(stream) },
-            KeyConditionExpression: 'aggregationStreamid = :key',
-            TableName: this.getTableName()
-        };
-        if (offset) {
-            filter.ExclusiveStartKey = offset;
-        }
-        if (limit) {
-            filter.Limit = limit;
-        }
+        const filter: any = this.getEventsFilter(stream, offset, limit);
 
         const items: ItemList = (await this.documentClient.query(filter).promise()).Items;
 
@@ -99,5 +89,20 @@ export class EventsTable extends DynamoDBTable {
 
     private getKey(stream: Stream): string {
         return `${stream.aggregation}:${stream.id}`;
+    }
+
+    private getEventsFilter(stream: Stream, offset: string, limit: number) {
+        const filter: any = {
+            ExpressionAttributeValues: { ':key': this.getKey(stream) },
+            KeyConditionExpression: 'aggregationStreamid = :key',
+            TableName: this.getTableName()
+        };
+        if (offset) {
+            filter.ExclusiveStartKey = offset;
+        }
+        if (limit) {
+            filter.Limit = limit;
+        }
+        return filter;
     }
 }

@@ -16,6 +16,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: npm run test:unit
       - run: npm run test:mutation
         env:
           STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}
@@ -24,3 +25,9 @@ jobs:
         with:
           name: mutation-report
           path: ./reports/mutation
+      - name: Upload Code coverage report
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.codecov }}
+          file: ./reports/coverage/*.json
+    
